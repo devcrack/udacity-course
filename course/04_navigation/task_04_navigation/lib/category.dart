@@ -47,7 +47,7 @@ class Category extends StatelessWidget {
 
   /// Navigates to the [ConverterRoute].
   void _navigateToConverter(BuildContext context) {
-    // TODO: Using the Navigator, navigate to the [ConverterRoute]
+    // TODO: [X] Using the Navigator, navigate to the [ConverterRoute]
     Navigator.of(context)
         .push(MaterialPageRoute<Null>(builder: (BuildContext context) {
       return Scaffold(
@@ -86,7 +86,7 @@ class Category extends StatelessWidget {
           // syntax.
           // TODO: Update this onTap property to call _navigateToConverter()
           onTap: () {
-            print('I was tapped!');
+            this._navigateToConverter(context);
           },
           child: Padding(
             padding: EdgeInsets.all(8.0),
