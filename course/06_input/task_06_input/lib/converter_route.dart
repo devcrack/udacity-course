@@ -40,10 +40,39 @@ class ConverterRoute extends StatefulWidget {
 class _ConverterRouteState extends State<ConverterRoute> {
   // TODO: Set some variables, such as for keeping track of the user's input
   // value and units
+  Unit unit;
+  double inputValue;
+  String _convertedValue = 'Holi';
+  List<DropdownMenuItem> _unitMenuItems;
 
   // TODO: Determine whether you need to override anything, such as initState()
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    this.createDropdownItems();
+  }
 
   // TODO: Add other helper functions. We've given you one, _format()
+  void createDropdownItems() {
+    var nwItems = <DropdownMenuItem>[];
+
+    for (var unit in widget.units) {
+      //FOR EACH
+      DropdownMenuItem nwDropMnuItem = DropdownMenuItem(
+        value: unit,
+        child: Container(
+          child: Text(
+            unit.name,
+          ),
+        ),
+      );
+      nwItems.add(nwDropMnuItem);
+    }
+    setState(() {
+      this._unitMenuItems = nwItems;
+    });
+  }
 
   /// Clean up conversion; trim trailing zeros, e.g. 5.500 -> 5.5, 10.0 -> 10
   String _format(double conversion) {
@@ -63,6 +92,29 @@ class _ConverterRouteState extends State<ConverterRoute> {
 
   @override
   Widget build(BuildContext context) {
+    final input = Padding(
+        //Create a container that is the main container
+        padding: EdgeInsets.all(16.0),
+        child: Column(
+          //The columns put a list of child widgets in vertical direction.
+          children: [
+            TextField(
+              decoration: InputDecoration(
+                labelText: 'Hora Perro'
+              ),
+            )],
+        ));
+    final preConverterForm = Column(
+      children: <Widget>[
+        input
+      ],
+    );
+    final Padding converterForm = Padding(
+        padding: EdgeInsets.all(16.0),
+      child: preConverterForm
+    );
+
+    return converterForm;
     // TODO: Create the 'input' group of widgets. This is a Column that
     // includes the input value, and 'from' unit [Dropdown].
 
@@ -74,28 +126,5 @@ class _ConverterRouteState extends State<ConverterRoute> {
     // TODO: Return the input, arrows, and output widgets, wrapped in a Column.
 
     // TODO: Delete the below placeholder code.
-    final unitWidgets = widget.units.map((Unit unit) {
-      return Container(
-        color: widget.color,
-        margin: EdgeInsets.all(8.0),
-        padding: EdgeInsets.all(16.0),
-        child: Column(
-          children: <Widget>[
-            Text(
-              unit.name,
-              style: Theme.of(context).textTheme.headline,
-            ),
-            Text(
-              'Conversion: ${unit.conversion}',
-              style: Theme.of(context).textTheme.subhead,
-            ),
-          ],
-        ),
-      );
-    }).toList();
-
-    return ListView(
-      children: unitWidgets,
-    );
   }
 }
