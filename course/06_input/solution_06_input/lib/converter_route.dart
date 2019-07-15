@@ -38,6 +38,7 @@ class ConverterRoute extends StatefulWidget {
 }
 
 class _ConverterRouteState extends State<ConverterRoute> {
+  // TODO: Set some variables, such as for keeping track of the user's input
   Unit _fromValue;
   Unit _toValue;
   double _inputValue;
@@ -45,6 +46,7 @@ class _ConverterRouteState extends State<ConverterRoute> {
   List<DropdownMenuItem> _unitMenuItems;
   bool _showValidationError = false;
 
+  // TODO: Determine whether you need to override anything, such as initState()
   @override
   void initState() {
     super.initState();
@@ -52,12 +54,13 @@ class _ConverterRouteState extends State<ConverterRoute> {
     _setDefaults();
   }
 
+  // TODO: Add other helper functions. We've given you one, _format()
   /// Creates fresh list of [DropdownMenuItem] widgets, given a list of [Unit]s.
   void _createDropdownMenuItems() {
     var newItems = <DropdownMenuItem>[];
     for (var unit in widget.units) {
       newItems.add(DropdownMenuItem(
-        value: unit.name,
+        value: unit,
         child: Container(
           child: Text(
             unit.name,
@@ -71,6 +74,7 @@ class _ConverterRouteState extends State<ConverterRoute> {
     });
   }
 
+  // TODO: Add other helper functions. We've given you one, _format()
   /// Sets the default values for the 'from' and 'to' [Dropdown]s.
   void _setDefaults() {
     setState(() {
@@ -106,7 +110,8 @@ class _ConverterRouteState extends State<ConverterRoute> {
     setState(() {
       if (input == null || input.isEmpty) {
         _convertedValue = '';
-      } else {
+      }
+      else {
         // Even though we are using the numerical keyboard, we still have to check
         // for non-numerical input such as '5..0' or '6 -3'
         try {

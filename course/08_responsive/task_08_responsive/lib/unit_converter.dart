@@ -247,8 +247,7 @@ class _UnitConverterState extends State<UnitConverter> {
     );
 
     // TODO: Use a ListView instead of a Column
-    final converter = Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
+    final converter = ListView(
       children: [
         input,
         arrows,
@@ -260,7 +259,20 @@ class _UnitConverterState extends State<UnitConverter> {
     // in landscape mode
     return Padding(
       padding: _padding,
-      child: converter,
+      child: OrientationBuilder(
+          builder:(BuildContext context, Orientation orientation) {
+            if (Orientation.portrait == orientation){ // The cellphone is in vertical position.
+              return converter;
+            }
+            else {
+              return Container(
+                width: 500.0,
+                child: converter
+              );
+            }
+          }
+      ),
+//      child: converter,
     );
   }
 }

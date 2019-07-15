@@ -93,9 +93,7 @@ class _CategoryRouteState extends State<CategoryRoute> {
 
   /// Function to call when a [Category] is tapped.
   void _onCategoryTap(Category category) {
-    setState(() {
-      _currentCategory = category;
-    });
+
   }
 
   /// Makes the correct number of rows for the list view.
